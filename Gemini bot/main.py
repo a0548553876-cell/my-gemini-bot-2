@@ -14,7 +14,7 @@ YEMOT_TOKEN = "0773363481:8553876"
 
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="gemini-3.1-flash-lite",
     system_instruction="אתה עוזר קולי של מערכת טלפונית. עליך לתת תשובה ישירה, קצרה מאוד (עד 2 משפטים). בלי הקדמות, בלי רשימות, ורק במילים פשוטות שמתאימות לדיבור."
 )
 
