@@ -100,5 +100,7 @@ async def process_yemot(request: Request):
             try:
                 genai.delete_file(uploaded_audio.name)
                 print("DEBUG: Successfully deleted audio from Google servers.")
-            except Exception as google_err:
-                print(f"DEBUG: Failed to delete file from Google: {google_err}")
+          except Exception as e:
+        # זה ידפיס בלוגים את השגיאה המדויקת שקורית
+        print(f"CRITICAL ERROR: {str(e)}")
+        return PlainTextResponse(f"id_list_message=t-שגיאה: {str(e)}")
