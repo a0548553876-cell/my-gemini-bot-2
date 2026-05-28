@@ -33,10 +33,19 @@ async def process_yemot(request: Request):
         # מחזירים שגיאה בפורמט שימות יודעת להקריא (טקסט לדיבור)
          return PlainTextResponse("id_list_message=t-שגיאה. לא התקבל נתיב להקלטה.")
 
-    # 2. הורדת קובץ השמע מהשרתים של ימות המשיח (API Call2All)
-    download_url = f"https://www.call2all.co.il/ym/api/DownloadFile?token={YEMOT_TOKEN}&path={file_path}"
-    response = requests.get(download_url)
-
+    # 1. הורדת הקובץ מימות המשיח
+    download_url = f"https://www.call2all.co.il/ym/api/DownloadFile?token={yemot_token}&path={file_path}"
+    
+    # תוספת קטנה כדי לראות ב-Logs מה הכתובת שהשרת מנסה להוריד ממנה
+    print(f"DEBUG: Trying to download from: {download_url}")
+    
+    try:
+        response = requests.get(download_url)
+        # נוסיף לוג גם לסטטוס שקיבלנו מהשרת של ימות
+        print(f"DEBUG: Yemot response status: {response.status_code}")
+        
+        if response.status_code != 200:
+            return PlainTextResponse("id_list_message=t-שגיאה בהורדת הקובץ מהשרת")
     if response.status_code != 200:
          return PlainTextResponse("id_list_message=t-שגיאה. השרת לא הצליח להוריד את ההקלטה.")
 
