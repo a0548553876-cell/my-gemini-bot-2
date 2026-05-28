@@ -24,6 +24,8 @@ async def process_yemot(request: Request):
     
     # שליפת הנתיב
     file_path = params.get("val") or params.get("RecordFile")
+    if file_path and not file_path.startswith("ivr2:"):
+        file_path = f"ivr2:{file_path}"
     if not file_path:
         return PlainTextResponse("id_list_message=t-שגיאה. לא התקבל נתיב להקלטה.")
 
