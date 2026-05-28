@@ -100,7 +100,9 @@ async def process_yemot(request: Request):
             try:
                 genai.delete_file(uploaded_audio.name)
                 print("DEBUG: Successfully deleted audio from Google servers.")
-          except Exception as e:
-        # זה ידפיס בלוגים את השגיאה המדויקת שקורית
-        print(f"CRITICAL ERROR: {str(e)}")
-        return PlainTextResponse(f"id_list_message=t-שגיאה: {str(e)}")
+    except Exception as e:
+        # זה מדפיס את השגיאה המלאה ללוגים של Railway שנוכל לראות מה הבעיה
+        import traceback
+        error_msg = traceback.format_exc()
+        print(f"CRITICAL ERROR TRACEBACK: {error_msg}")
+        return PlainTextResponse(f"id_list_message=t-שגיאה במערכת: {str(e)}")
