@@ -17,13 +17,18 @@ model = genai.GenerativeModel(
     system_instruction="אתה עוזר קולי של מערכת טלפונית. עליך לתת תשובה ישירה, קצרה מאוד (עד 2 משפטים). בלי הקדמות, בלי רשימות, ורק במילים פשוטות שמתאימות לדיבור."
 )
 
-@app.api_route("/process-yemot", methods=["GET", "POST"])
+@app.api_route("/", methods=["GET", "POST"])
 async def process_yemot(request: Request):
-    # 1. קליטת הנתיב שימות המשיח שולחת. 
-    # נניח שבהגדרות API בימות המשיח קראת למשתנה ההקלטה RecordFile
-    params = request.query_params
-    file_path = params.get("RecordFile")
-
+    # נשלוף את כל הפרמטרים
+    params = dict(request.query_params)
+    
+    # ננסה לקבל את ה-val (לפי הלוגים, זה מה שימות המשיח שולחת)
+    file_path = params.get("val")
+    
+    # אם לא מצאנו val, אולי ימות המשיח שולחת תחת שם אחר, 
+    # אז ננסה גם את RecordFile ליתר ביטחון (זה לא יזיק)
+    if not file_path:
+        file_path = params.get("RecordFile")
     if not file_path:
         # מחזירים שגיאה בפורמט שימות יודעת להקריא (טקסט לדיבור)
          return PlainTextResponse("id_list_message=t-שגיאה. לא התקבל נתיב להקלטה.")
