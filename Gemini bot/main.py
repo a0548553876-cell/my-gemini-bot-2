@@ -11,7 +11,7 @@ GOOGLE_API_KEY = os.environ.get("MY_GOOGLE_KEY")
 YEMOT_TOKEN = "0773363481:8553876"
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel(model_name="gemini-1.5-flash") # נסה שוב את זה, או שתחליף לשם המדויק מהרשימה שלך
+model = genai.GenerativeModel(model_name="gemini-2.5-flash") # נסה שוב את זה, או שתחליף לשם המדויק מהרשימה שלך
 
 @app.api_route("/", methods=["GET", "POST"])
 async def process_yemot(request: Request):
