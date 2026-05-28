@@ -9,7 +9,7 @@ app = FastAPI()
 
 # --- הגדרות ---
 # שים לב: כדאי להחליף את המפתחות האלו בהקדם כי הם נחשפו
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+GOOGLE_API_KEY = os.environ.get("MY_GOOGLE_KEY")
 YEMOT_TOKEN = "0773363481:8553876"
 
 genai.configure(api_key=GOOGLE_API_KEY)
