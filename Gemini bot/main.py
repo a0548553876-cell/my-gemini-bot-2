@@ -68,4 +68,3 @@ async def process_yemot(request: Request):
         # מחיקת הקובץ הזמני מתבצעת תמיד, גם אם הייתה שגיאה
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
-ᐧ
